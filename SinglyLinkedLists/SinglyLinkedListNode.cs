@@ -15,14 +15,18 @@ namespace SinglyLinkedLists
         private SinglyLinkedListNode next;
         public SinglyLinkedListNode Next
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return next; }
+            set {
+                if (value == this) {
+                    throw new ArgumentException();
+                } this.next = value;
+            }
         }
 
         private string value;
         public string Value 
         {
-            get { throw new NotImplementedException(); }
+            get { return value; } // same like if we were using this.value
         }
 
         public static bool operator <(SinglyLinkedListNode node1, SinglyLinkedListNode node2)
@@ -37,10 +41,14 @@ namespace SinglyLinkedLists
             return node1.CompareTo(node2) > 0;
         }
 
-        public SinglyLinkedListNode(string value)
+        public SinglyLinkedListNode(string input)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
 
+            this.value = input;
+
+            // Undeclared data members default to null, but... we are doing it anyway.
+            this.next = null;
             // Used by the visualizer:
             allNodes.Add(this);
         }
@@ -53,7 +61,32 @@ namespace SinglyLinkedLists
 
         public bool IsLast()
         {
-            throw new NotImplementedException();
+            /* this makes the test past:
+            if (this.next == null)
+            {
+                return true;
+            }
+            else {
+                return false;
+            } */
+
+            /* Refactor 1: no else statement
+            if (this.next == null)
+            {
+                return true;
+            }
+            return false;
+            */
+
+            // Refactor 2: (best option - less code)
+            return this.next == null; 
+
+
+        }
+
+        public override string ToString()
+        {
+            return this.value;
         }
     }
 }
