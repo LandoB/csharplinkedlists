@@ -16,17 +16,21 @@ namespace SinglyLinkedLists
         public SinglyLinkedListNode Next
         {
             get { return next; }
-            set {
-                if (value == this) {
+            set
+            {
+                if (value.Equals(this))
+                {
                     throw new ArgumentException();
-                } this.next = value;
+                }
+                this.next = value;
             }
         }
 
-        private string value;
-        public string Value 
+        private string value; // same as this.value
+        // Value is a property!! Fix the getter!
+        public string Value
         {
-            get { return value; } // same like if we were using this.value
+            get { return value; }
         }
 
         public static bool operator <(SinglyLinkedListNode node1, SinglyLinkedListNode node2)
@@ -41,14 +45,26 @@ namespace SinglyLinkedLists
             return node1.CompareTo(node2) > 0;
         }
 
+        public static bool operator ==(SinglyLinkedListNode node1, SinglyLinkedListNode node2)
+        {
+            return node1.CompareTo(node2) == 0;
+        }
+
+        public static bool operator !=(SinglyLinkedListNode node1, SinglyLinkedListNode node2)
+        {
+            /* The long way
+            return node1.CompareTo(node2) != 0;
+            */
+            return !(node1 == node2);
+        }
+
         public SinglyLinkedListNode(string input)
         {
-            //throw new NotImplementedException();
-
             this.value = input;
 
-            // Undeclared data members default to null, but... we are doing it anyway.
+            // data members default to null, but...
             this.next = null;
+
             // Used by the visualizer:
             allNodes.Add(this);
         }
@@ -56,37 +72,51 @@ namespace SinglyLinkedLists
         // READ: http://msdn.microsoft.com/en-us/library/system.icomparable.compareto.aspx
         public int CompareTo(Object obj)
         {
-            throw new NotImplementedException();
+            SinglyLinkedListNode other_node = obj as SinglyLinkedListNode;
+            if (this.value == other_node.Value)
+            {
+                return 0;
+            }
+            return 1;
+            /* Come back to this. What are other ways to compare instances? 
+            else
+            {
+                throw new NotImplementedException();
+            }
+            */
+
+
         }
 
         public bool IsLast()
         {
-            /* this makes the test past:
+            /* this makes the test pass
             if (this.next == null)
             {
                 return true;
-            }
-            else {
+            } else
+            {
                 return false;
-            } */
-
+            }
+            */
             /* Refactor 1: no else statement
             if (this.next == null)
             {
                 return true;
-            }
+            } 
             return false;
             */
 
-            // Refactor 2: (best option - less code)
-            return this.next == null; 
-
+            /* Refactor 2 */
+            return this.next == null;
 
         }
+
 
         public override string ToString()
         {
             return this.value;
         }
+
     }
 }
