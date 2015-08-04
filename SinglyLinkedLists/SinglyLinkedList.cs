@@ -7,6 +7,7 @@ namespace SinglyLinkedLists
 {
     public class SinglyLinkedList
     {
+        public SinglyLinkedListNode first_node;
         public SinglyLinkedList()
         {
             // NOTE: This constructor isn't necessary, once you've implemented the constructor below.
@@ -37,23 +38,80 @@ namespace SinglyLinkedLists
 
         public void AddLast(string value)
         {
-            throw new NotImplementedException();
+            if (this.First() == null)
+            {
+                first_node = new SinglyLinkedListNode(value);
+            }
+            else
+            {
+                var node = this.first_node;
+                while (!node.IsLast())
+                {
+                    node = node.Next;
+                }
+                node.Next = new SinglyLinkedListNode(value);
+            }
+            
         }
 
         // NOTE: There is more than one way to accomplish this.  One is O(n).  The other is O(1).
         public int Count()
         {
-            throw new NotImplementedException();
+            // If the list is empty
+            // this.Count() == 0;
+            if (this.First() == null)
+            {
+                return 0;
+            }
+            else
+            {
+                int length = 1;
+                var node = this.first_node;
+                // Complexity is 0(n)
+                while (node.Next != null)
+                {
+                    length++;
+                    node = node.Next;
+                }
+                return length; 
+            }
         }
 
         public string ElementAt(int index)
         {
-            throw new NotImplementedException();
+            if (this.First() == null)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else
+            {
+                var node = this.first_node;
+
+                for(var i = 0; i <= index; i++)
+                {
+                    if ( i == index )
+                    {
+                        break;
+                    }
+                    node = node.Next;
+                }
+                return node.Value;
+            }
         }
 
         public string First()
         {
-            throw new NotImplementedException();
+            if (this.first_node == null)
+            {
+                return null;
+            }
+            else
+            {
+                return this.first_node.Value;
+            }
+
+            // return this.first_node.Value
+
         }
 
         public int IndexOf(string value)
@@ -71,7 +129,28 @@ namespace SinglyLinkedLists
         // HINT 3: If you highlight code and right click, you can use the refactor menu to extract a method for you...
         public string Last()
         {
-            throw new NotImplementedException();
+            // If the list is empty
+            var node = this.first_node;
+            if (node == null)
+            {
+                // The list is empty.
+                return null;
+            } 
+            else
+            {
+                // Step 1: Do I ned to loop???
+                // Step 2: IF yes, Do I already have an example of how??? *** THIS IS VERY IMPORTANT ***
+                // Step 3: How can I modify the previous examples???
+                // Step 4: Write what I think works.
+                // Step 5: Rebuild/Re-run tests.
+                // Step 6: Rinse and repeat.
+
+                while (!node.IsLast())
+                {
+                    node = node.Next;
+                }
+                return node.Value;
+            }
         }
 
         public void Remove(string value)
