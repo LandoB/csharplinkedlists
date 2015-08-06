@@ -170,28 +170,62 @@ namespace SinglyLinkedLists
 
         public override string ToString()
         {
-            // If the list is empty
+            // THIS IS TEACHER'S SOLUTION:
+            var opening = "{";
+            var ending = "}";
+            var space = " ";
+            var output = "";
+            var quote = "\"";
+            var comma = "," + space;
+            output += opening;
             var node = this.first_node;
-            if (node == null)
+            if (this.Count() >= 1)
             {
-                // The list is empty.
-                return "{ }";
-            }
-            else
-            {
-                // Check with Count() if the list has only one item:
-                int length = 1;
-                node = this.first_node;
-                
-                // Complexity is 0(n)
-                while (node.Next != null)
+                output += space;
+                while (!node.IsLast())
                 {
-                    length++;
+                    output += quote + node.Value + quote + comma;
                     node = node.Next;
                 }
-                return "{ \"foo\" }";
-
+                output += quote + this.Last() + quote;
             }
+            output += space;
+            output += ending;
+            return output;
+
+            /* THIS  WAS OUR SOLUTION:
+        // If the list is empty
+        var node = this.first_node;
+        if (node == null)
+        {
+            // The list is empty.
+            return "{ }";
         }
+        else
+        {
+            // Check with Count() if the list has only one item:
+            int length = 1;
+            node = this.first_node;
+
+            // Complexity is 0(n)
+            while (node.Next != null)
+            {
+                length++;
+                node = node.Next;
+            }
+            return "{ \"foo\" }";
+
+            */
+
+            /*
+            // THIS IS THE SOLUTION USING STRING BUILDER:
+
+
+            */
+
+        }
+
     }
 }
+    
+
