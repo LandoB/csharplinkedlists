@@ -170,6 +170,38 @@ namespace SinglyLinkedLists
 
         public override string ToString()
         {
+            // THIS IS THE SOLUTION USING STRING BUILDER:
+            var opening = "{";
+            var ending = "}";
+            var space = " ";
+            //var output = "";
+            var quote = "\"";
+            var comma = "," + space;
+            //output += opening;
+            var node = this.first_node;
+            StringBuilder builder = new StringBuilder();
+            builder.Append(opening);
+            if (this.Count() >= 1)
+            {
+                //output += space;
+                builder.Append(space);
+                while (!node.IsLast())
+                {
+                    //output += quote + node.Value + quote + comma;
+                    builder.Append(quote).Append(node.Value).Append(quote).Append(comma);
+                    node = node.Next;
+                }
+                //output += quote + this.Last() + quote;
+                builder.Append(quote).Append(this.Last()).Append(quote);
+            }
+            //output += space;
+            builder.Append(space);
+            //output += ending;
+            builder.Append(ending);
+            //return output;
+            return builder.ToString();
+
+            /*
             // THIS IS TEACHER'S SOLUTION:
             var opening = "{";
             var ending = "}";
@@ -193,33 +225,28 @@ namespace SinglyLinkedLists
             output += ending;
             return output;
 
-            /* THIS  WAS OUR SOLUTION:
-        // If the list is empty
-        var node = this.first_node;
-        if (node == null)
-        {
-            // The list is empty.
-            return "{ }";
-        }
-        else
-        {
-            // Check with Count() if the list has only one item:
-            int length = 1;
-            node = this.first_node;
-
-            // Complexity is 0(n)
-            while (node.Next != null)
-            {
-                length++;
-                node = node.Next;
-            }
-            return "{ \"foo\" }";
 
             */
 
-            /*
-            // THIS IS THE SOLUTION USING STRING BUILDER:
-
+            /* THIS  WAS OUR SOLUTION:
+            // If the list is empty
+            var node = this.first_node;
+            if (node == null)
+            {
+                // The list is empty.
+                return "{ }";
+            }
+            else
+            {
+                // Check with Count() if the list has only one item:
+                int length = 1;
+                node = this.first_node;
+                while (node.Next != null)
+                {
+                    length++;
+                    node = node.Next;
+                }
+                return "{ \"foo\" }";
 
             */
 
