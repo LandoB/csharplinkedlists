@@ -224,8 +224,6 @@ namespace SinglyLinkedLists
             output += space;
             output += ending;
             return output;
-
-
             */
 
             /* THIS  WAS OUR SOLUTION:
@@ -247,7 +245,6 @@ namespace SinglyLinkedLists
                     node = node.Next;
                 }
                 return "{ \"foo\" }";
-
             */
 
         }
