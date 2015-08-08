@@ -165,7 +165,24 @@ namespace SinglyLinkedLists
 
         public string[] ToArray()
         {
-            throw new NotImplementedException();
+            var length = 0;
+            var node = this.first_node;
+            string[] emptyArray = new string[] { };
+            //string[] myArray = new string[length];
+
+            if (length == 0)
+            {
+                return emptyArray;
+            } /*
+            else
+            {
+                for ( int i = 0; i < length; i++)
+                {
+                    myArray = node.Value;
+                    node = node.Next;
+                }
+            } */
+            return emptyArray; 
         }
 
         public override string ToString()
