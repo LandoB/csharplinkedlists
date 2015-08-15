@@ -16,24 +16,96 @@ namespace SinglyLinkedLists
         // READ: http://msdn.microsoft.com/en-us/library/aa691335(v=vs.71).aspx
         public SinglyLinkedList(params object[] values)
         {
-            throw new NotImplementedException();
+            if (values.Count() == 0)
+            {
+                throw new ArgumentException();
+            }
+            for (var i = 0; i < values.Count(); i++)
+            {
+               this.AddLast(values[i].ToString());
+            }
         }
 
         // READ: http://msdn.microsoft.com/en-us/library/6x16t2tx.aspx
         public string this[int i]
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return this.ElementAt(i); }
+            set
+            {
+                var placeHolderList = new SinglyLinkedList();
+                for (var q = 0; q < this.Count(); q++)
+                {
+                    if (q == i)
+                    {
+                        placeHolderList.AddLast(value);
+                    }
+                    else
+                    {
+                        placeHolderList.AddLast(this.ElementAt(q));
+                    }
+                }
+                first_node = new SinglyLinkedListNode(placeHolderList.First());
+                for (var w = 1; w < placeHolderList.Count(); w++)
+                {
+                    this.AddLast(placeHolderList.ElementAt(w));
+                }
+            }
         }
 
-        public void AddAfter(string existingValue, string value)
+        public void AddAfter(string existingValue, string newValue)
         {
-            throw new NotImplementedException();
+            int testForValue = -1;
+            //throw new NotImplementedException();
+            for (var i = 0; i < this.Count(); i++)
+            {
+                if (this.ElementAt(i) == existingValue)
+                {
+                    testForValue = i;
+                    break;
+                }
+            }
+            if (testForValue < 0)
+            {
+                throw new ArgumentException();
+            }
+            var placeHolderList = new SinglyLinkedList();
+            for (var q = 0; q < this.Count(); q++)
+            {
+                placeHolderList.AddLast(this.ElementAt(q));
+                if (q == testForValue)
+                {
+                    placeHolderList.AddLast(newValue);
+                }
+            }
+            first_node = new SinglyLinkedListNode(placeHolderList.First());
+            for (var w = 1; w < placeHolderList.Count(); w++)
+            {
+                this.AddLast(placeHolderList.ElementAt(w));
+            }
         }
 
         public void AddFirst(string value)
         {
-            throw new NotImplementedException();
+            if (this.First() == null)
+            {
+                first_node = new SinglyLinkedListNode(value);
+            } 
+            else
+            {
+                var newFirstNode = new SinglyLinkedListNode(value);
+                var placeHolderList = new SinglyLinkedList();
+                placeHolderList.AddFirst(newFirstNode.Value);
+                for (var i = 0; i < this.Count(); i++)
+                {
+                    placeHolderList.AddLast(this.ElementAt(i));
+                }
+                first_node = new SinglyLinkedListNode(placeHolderList.First());
+                for (var q = 1; q < placeHolderList.Count(); q++)
+                {
+                    this.AddLast(placeHolderList.ElementAt(q));
+                }
+                
+            } 
         }
 
         public void AddLast(string value)
@@ -116,7 +188,17 @@ namespace SinglyLinkedLists
 
         public int IndexOf(string value)
         {
-            throw new NotImplementedException();
+            int testForValue = -1;
+            //throw new NotImplementedException();
+            for (var i = 0; i < this.Count(); i++)
+            {
+                if (this.ElementAt(i) == value)
+                {
+                    testForValue = i;
+                    break;
+                }
+            }
+            return testForValue;
         }
 
         public bool IsSorted()
