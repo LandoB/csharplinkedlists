@@ -151,7 +151,7 @@ namespace SinglyLinkedLists
 
         public string ElementAt(int index)
         {
-            if (this.First() == null)
+            if (this.First() == null || this.Count() <= index)
             {
                 throw new ArgumentOutOfRangeException();
             }
