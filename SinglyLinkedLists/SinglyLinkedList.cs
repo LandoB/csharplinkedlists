@@ -201,7 +201,7 @@ namespace SinglyLinkedLists
             return testForValue;
         }
 
-        public bool IsSorted()
+        public bool IsSorted() // Refactor to use CompareTo(Object obj) method since it will take anything not just a string.
         {
             if (this.First() != null)
             {
