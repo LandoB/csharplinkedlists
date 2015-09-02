@@ -201,16 +201,18 @@ namespace SinglyLinkedLists
             return testForValue;
         }
 
-        public bool IsSorted() // Refactor to use CompareTo(Object obj) method since it will take anything not just a string.
+        public bool IsSorted() // Refactored to use CompareTo(Object obj) method since it will take anything not just a string. Homework done.
         {
             if (this.First() != null)
             {
+                var node = this.first_node;
                 for (var i = 0; i < this.Count()-1; i++)
                 {
-                    if (String.Compare(this.ElementAt(i), this.ElementAt(i + 1), StringComparison.CurrentCulture) == 1)
+                    if (node.CompareTo(node.Next) > 0)
                     {
                         return false;
                     }
+                    node = node.Next;
                 }
             }
             return true;
